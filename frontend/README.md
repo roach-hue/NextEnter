@@ -1,7 +1,4 @@
-# NextEnter Frontend (참고용)
-
-> **이 디렉토리는 팀 프로젝트의 프론트엔드 코드를 참고용으로 포함한 것입니다.**
-> 본인의 주 담당 파트는 [python/](../python/) (AI 엔진 서버)입니다.
+# NextEnter Frontend (본인 담당)
 
 ## 소개
 
