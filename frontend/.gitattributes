@@ -1,0 +1,36 @@
+# Whitespace 설정
+* whitespace=trailing-space,space-before-tab,blank-at-eol,blank-at-eof
+
+# 모든 텍스트 파일에 대해 자동으로 줄바꿈 문자 처리
+* text=auto
+
+# 소스 코드 파일들은 LF로 통일 (선택사항)
+*.js text eol=lf
+*.jsx text eol=lf
+*.json text eol=lf
+*.css text eol=lf
+*.scss text eol=lf
+*.html text eol=lf
+*.md text eol=lf
+*.yml text eol=lf
+*.yaml text eol=lf
+
+# 바이너리 파일로 처리할 파일들
+*.png binary
+*.jpg binary
+*.jpeg binary
+*.gif binary
+*.ico binary
+*.svg binary
+*.woff binary
+*.woff2 binary
+*.ttf binary
+*.eot binary
+*.pdf binary
+*.zip binary
+*.tar.gz binary
+
+# Git 관련 파일은 LF로 고정
+.gitattributes text eol=lf
+.gitignore text eol=lf
+

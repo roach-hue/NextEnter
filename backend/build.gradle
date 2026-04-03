@@ -1,0 +1,99 @@
+plugins {
+    id 'java'
+    id 'org.springframework.boot' version '3.5.6'
+    id 'io.spring.dependency-management' version '1.1.7'
+}
+
+group = 'com.codeQuery'
+version = '0.0.1-SNAPSHOT'
+description = 'codeQuery project for Spring Boot'
+
+java {
+    toolchain {
+        languageVersion = JavaLanguageVersion.of(21)
+    }
+    sourceCompatibility = '21'
+    targetCompatibility = '21'
+}
+
+configurations {
+    compileOnly {
+        extendsFrom annotationProcessor
+    }
+}
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+// Spring Boot Web
+    implementation 'org.springframework.boot:spring-boot-starter-web'
+    implementation 'org.springframework.boot:spring-boot-starter-thymeleaf'
+    implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
+    implementation 'org.springframework.boot:spring-boot-starter-security'
+    implementation 'org.springframework.boot:spring-boot-starter-websocket'
+    implementation 'org.springframework.boot:spring-boot-starter-validation'
+    implementation 'org.springdoc:springdoc-openapi-starter-webmvc-ui:2.6.0'
+    implementation 'org.springframework.boot:spring-boot-starter-oauth2-client'
+    implementation 'org.springframework.boot:spring-boot-starter-aop'
+
+// 이메일
+    implementation 'org.springframework.boot:spring-boot-starter-mail'
+
+// Database
+    implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
+    runtimeOnly 'com.mysql:mysql-connector-j'
+    // runtimeOnly 'com.h2database:h2'  // noH2: H2 비활성화
+
+// Lombok
+    compileOnly 'org.projectlombok:lombok'
+    annotationProcessor 'org.projectlombok:lombok'
+
+// Development Tools
+    developmentOnly 'org.springframework.boot:spring-boot-devtools'
+
+// JWT
+    implementation 'io.jsonwebtoken:jjwt-api:0.12.3'
+    runtimeOnly 'io.jsonwebtoken:jjwt-impl:0.12.3'
+    runtimeOnly 'io.jsonwebtoken:jjwt-jackson:0.12.3'
+
+// Gson
+    implementation 'com.google.code.gson:gson:2.10.1'
+// Swagger (API 문서화)
+    implementation 'org.springdoc:springdoc-openapi-starter-webmvc-ui:2.3.0'
+    
+// JSON 처리 (Jackson)
+    implementation 'com.fasterxml.jackson.core:jackson-databind'
+
+// PDF 텍스트 추출 (이력서 파일)
+    implementation 'org.apache.pdfbox:pdfbox:3.0.3'
+
+// DOCX 텍스트 추출 (이력서 파일)
+    implementation 'org.apache.poi:poi-ooxml:5.2.5'
+
+// Test
+    testImplementation 'org.springframework.boot:spring-boot-starter-test'
+    testImplementation 'org.springframework.security:spring-security-test'
+    testRuntimeOnly 'org.junit.platform:junit-platform-launcher'
+}
+
+tasks.named('test') {
+    useJUnitPlatform()
+    jvmArgs "-Djdk.attach.allowAttachSelf=true"
+    maxHeapSize = '1g'           // 512m → 1g (OOM 방지)
+    maxParallelForks = 2         // 병렬 워커 수 제한
+}
+
+// 컴파일 옵션
+tasks.withType(JavaCompile).configureEach {
+    options.encoding = 'UTF-8'
+    options.compilerArgs << '-parameters'
+}
+
+// 빌드 로깅
+gradle.taskGraph.whenReady { graph ->
+    if (graph.hasTask(build)) {
+        println "🔨 codeQuery 빌드 시작 (Java 21)"
+    }
+}
